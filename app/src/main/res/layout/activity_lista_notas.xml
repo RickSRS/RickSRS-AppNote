@@ -7,7 +7,7 @@
     tools:context=".ui.activity.ListaNotasActivity">
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/lista_notas_listview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/lista_notas_insere_nota"
