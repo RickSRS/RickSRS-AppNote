@@ -1,14 +1,15 @@
 package com.richardsoares.note.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.richardsoares.note.R;
 import com.richardsoares.note.dao.NotaDAO;
 import com.richardsoares.note.model.Nota;
-import com.richardsoares.note.ui.adapter.ListaNotasAdapter;
+import com.richardsoares.note.ui.recycler.adapter.ListaNotasAdapter;
 
 import java.util.List;
 
@@ -19,11 +20,15 @@ public class ListaNotasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_notas);
 
-        ListView listaNotas = findViewById(R.id.lista_notas_listview);
+        RecyclerView listaNotas = findViewById(R.id.lista_notas_recyclerview);
         NotaDAO dao = new NotaDAO();
-        dao.insere(new Nota("Primeira Nota", "Primeira Descrição"));
+        for (int i = 1; i < 10000; i++) {
+            dao.insere(new Nota("Titulo" + i, "Descrição" + i));
+        }
         List<Nota> todasNotas = dao.todos();
 
         listaNotas.setAdapter(new ListaNotasAdapter(this, todasNotas));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        listaNotas.setLayoutManager(layoutManager);
     }
 }
