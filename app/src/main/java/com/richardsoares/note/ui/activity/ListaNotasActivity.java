@@ -1,9 +1,11 @@
 package com.richardsoares.note.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.richardsoares.note.R;
@@ -21,6 +23,15 @@ public class ListaNotasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_notas);
         List<Nota> todasNotas = notasExemplo();
         configuracaRecyclerView(todasNotas);
+
+        TextView insereNotaBtn = findViewById(R.id.lista_notas_insere_nota);
+        insereNotaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iniciaFormularioNota = new Intent(ListaNotasActivity.this, FormularioNotaActivity.class);
+                startActivity(iniciaFormularioNota);
+            }
+        });
     }
 
     private List<Nota> notasExemplo() {
