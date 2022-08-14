@@ -1,17 +1,18 @@
 package com.richardsoares.note.ui.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import static com.richardsoares.note.ui.activity.NotaActivityConstantes.CHAVE_NOTA;
+import static com.richardsoares.note.ui.activity.NotaActivityConstantes.CODIGO_RESULTADO_NOTA_CRIADA;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.richardsoares.note.R;
-import com.richardsoares.note.dao.NotaDAO;
 import com.richardsoares.note.model.Nota;
 
 public class FormularioNotaActivity extends AppCompatActivity {
@@ -30,15 +31,29 @@ public class FormularioNotaActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_formulario_ic_salva_nota) {
-            EditText titulo = findViewById(R.id.formulario_nota_titulo);
-            EditText descricao = findViewById(R.id.formulario_nota_descricao);
-            Nota notaCriada = new Nota(titulo.getText().toString(), descricao.getText().toString());
-            Intent resultadoInsercao = new Intent();
-            resultadoInsercao.putExtra("nota", notaCriada);
-            setResult(2, resultadoInsercao);
+        if (ehMenuSalvaNota(item)) {
+            Nota notaCriada = criaNota();
+            retornaNota(notaCriada);
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void retornaNota(Nota notaCriada) {
+        Intent resultadoInsercao = new Intent();
+        resultadoInsercao.putExtra(CHAVE_NOTA, notaCriada);
+        setResult(CODIGO_RESULTADO_NOTA_CRIADA, resultadoInsercao);
+    }
+
+    @NonNull
+    private Nota criaNota() {
+        EditText titulo = findViewById(R.id.formulario_nota_titulo);
+        EditText descricao = findViewById(R.id.formulario_nota_descricao);
+        Nota notaCriada = new Nota(titulo.getText().toString(), descricao.getText().toString());
+        return notaCriada;
+    }
+
+    private boolean ehMenuSalvaNota(@NonNull MenuItem item) {
+        return item.getItemId() == R.id.menu_formulario_ic_salva_nota;
     }
 }
