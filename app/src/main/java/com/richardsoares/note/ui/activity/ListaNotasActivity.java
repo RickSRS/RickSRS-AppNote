@@ -17,7 +17,7 @@ import com.richardsoares.note.R;
 import com.richardsoares.note.dao.NotaDAO;
 import com.richardsoares.note.model.Nota;
 import com.richardsoares.note.ui.recycler.adapter.ListaNotasAdapter;
-import com.richardsoares.note.ui.recycler.adapter.OnItemClickListener;
+import com.richardsoares.note.ui.recycler.adapter.listener.OnItemClickListener;
 
 import java.util.List;
 
@@ -51,6 +51,9 @@ public class ListaNotasActivity extends AppCompatActivity {
 
     private List<Nota> pegaTodasNotas() {
         NotaDAO dao = new NotaDAO();
+        for (int i = 1; i <= 10; i++) {
+            dao.insere(new Nota("Titulo " + i, "Descrição" + i));
+        }
         return dao.todos();
     }
 
@@ -96,7 +99,7 @@ public class ListaNotasActivity extends AppCompatActivity {
         listaNotas.setAdapter(adapter);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick() {
+            public void onItemClick(Nota nota) {
 
             }
         });
