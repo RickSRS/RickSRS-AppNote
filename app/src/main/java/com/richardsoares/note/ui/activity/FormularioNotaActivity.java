@@ -2,9 +2,9 @@ package com.richardsoares.note.ui.activity;
 
 import static com.richardsoares.note.ui.activity.NotaActivityConstantes.CHAVE_INDEX;
 import static com.richardsoares.note.ui.activity.NotaActivityConstantes.CHAVE_NOTA;
-import static com.richardsoares.note.ui.activity.NotaActivityConstantes.CODIGO_RESULTADO_NOTA_CRIADA;
 import static com.richardsoares.note.ui.activity.NotaActivityConstantes.INDEX_INVALIDO;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -67,7 +67,7 @@ public class FormularioNotaActivity extends AppCompatActivity {
         Intent resultadoInsercao = new Intent();
         resultadoInsercao.putExtra(CHAVE_NOTA, notaCriada);
         resultadoInsercao.putExtra(CHAVE_INDEX, indexRecebido);
-        setResult(CODIGO_RESULTADO_NOTA_CRIADA, resultadoInsercao);
+        setResult(Activity.RESULT_OK, resultadoInsercao);
     }
 
     @NonNull
