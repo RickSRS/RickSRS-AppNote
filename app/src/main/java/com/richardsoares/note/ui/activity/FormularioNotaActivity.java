@@ -21,14 +21,17 @@ import java.io.Serializable;
 
 public class FormularioNotaActivity extends AppCompatActivity {
 
+    private int indexRecebido;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_nota);
 
         Intent dadosRecebidos = getIntent();
-        if (dadosRecebidos.hasExtra(CHAVE_NOTA)) {
+        if (dadosRecebidos.hasExtra(CHAVE_NOTA) && dadosRecebidos.hasExtra("index")) {
             Nota notaRecebida = (Nota) dadosRecebidos.getSerializableExtra(CHAVE_NOTA);
+            indexRecebido = dadosRecebidos.getIntExtra("index", -1);
             TextView titulo = findViewById(R.id.formulario_nota_titulo);
             titulo.setText(notaRecebida.getTitulo());
             TextView descricao = findViewById(R.id.formulario_nota_descricao);
@@ -55,6 +58,7 @@ public class FormularioNotaActivity extends AppCompatActivity {
     private void retornaNota(Nota notaCriada) {
         Intent resultadoInsercao = new Intent();
         resultadoInsercao.putExtra(CHAVE_NOTA, notaCriada);
+        resultadoInsercao.putExtra("index", indexRecebido);
         setResult(CODIGO_RESULTADO_NOTA_CRIADA, resultadoInsercao);
     }
 
