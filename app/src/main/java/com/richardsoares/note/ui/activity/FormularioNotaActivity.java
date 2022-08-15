@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,12 +17,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.richardsoares.note.R;
 import com.richardsoares.note.model.Nota;
 
+import java.io.Serializable;
+
 public class FormularioNotaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_nota);
+
+        Intent dadosRecebidos = getIntent();
+        if (dadosRecebidos.hasExtra(CHAVE_NOTA)) {
+            Nota notaRecebida = (Nota) dadosRecebidos.getSerializableExtra(CHAVE_NOTA);
+            TextView titulo = findViewById(R.id.formulario_nota_titulo);
+            titulo.setText(notaRecebida.getTitulo());
+            TextView descricao = findViewById(R.id.formulario_nota_descricao);
+            descricao.setText(notaRecebida.getDescricao());
+        }
     }
 
     @Override
