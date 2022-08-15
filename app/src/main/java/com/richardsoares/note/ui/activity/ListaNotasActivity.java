@@ -17,6 +17,7 @@ import com.richardsoares.note.R;
 import com.richardsoares.note.dao.NotaDAO;
 import com.richardsoares.note.model.Nota;
 import com.richardsoares.note.ui.recycler.adapter.ListaNotasAdapter;
+import com.richardsoares.note.ui.recycler.adapter.OnItemClickListener;
 
 import java.util.List;
 
@@ -93,5 +94,11 @@ public class ListaNotasActivity extends AppCompatActivity {
     private void configuraAdapter(List<Nota> todasNotas, RecyclerView listaNotas) {
         adapter = new ListaNotasAdapter(this, todasNotas);
         listaNotas.setAdapter(adapter);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick() {
+
+            }
+        });
     }
 }
