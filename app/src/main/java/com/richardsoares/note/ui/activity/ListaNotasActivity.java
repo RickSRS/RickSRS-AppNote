@@ -14,12 +14,14 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.richardsoares.note.R;
 import com.richardsoares.note.dao.NotaDAO;
 import com.richardsoares.note.model.Nota;
 import com.richardsoares.note.ui.recycler.adapter.ListaNotasAdapter;
+import com.richardsoares.note.ui.recycler.helper.callback.NotaItemTouchHelperCallback;
 
 import java.util.List;
 
@@ -118,6 +120,8 @@ public class ListaNotasActivity extends AppCompatActivity {
     private void configuracaRecyclerView(List<Nota> todasNotas) {
         RecyclerView listaNotas = findViewById(R.id.lista_notas_recyclerview);
         configuraAdapter(todasNotas, listaNotas);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new NotaItemTouchHelperCallback());
+        itemTouchHelper.attachToRecyclerView(listaNotas);
     }
 
     private void configuraAdapter(List<Nota> todasNotas, RecyclerView listaNotas) {
