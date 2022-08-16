@@ -9,7 +9,7 @@ import com.richardsoares.note.ui.recycler.adapter.ListaNotasAdapter;
 
 public class NotaItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
-    private ListaNotasAdapter adapter;
+    private final ListaNotasAdapter adapter;
 
     public NotaItemTouchHelperCallback(ListaNotasAdapter adapter) {
         this.adapter = adapter;
@@ -26,15 +26,23 @@ public class NotaItemTouchHelperCallback extends ItemTouchHelper.Callback {
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
         int indexInicial = viewHolder.getAdapterPosition();
         int indexFinal = target.getAdapterPosition();
+        trocaNotas(indexInicial, indexFinal);
+        return true;
+    }
+
+    private void trocaNotas(int indexInicial, int indexFinal) {
         new NotaDAO().troca(indexInicial, indexFinal);
         adapter.troca(indexInicial, indexFinal);
-        return true;
     }
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         int indexNotaDeslize = viewHolder.getAdapterPosition();
-        new NotaDAO().remove(indexNotaDeslize);
-        adapter.remove(indexNotaDeslize);
+        removeNota(indexNotaDeslize);
+    }
+
+    private void removeNota(int index) {
+        new NotaDAO().remove(index);
+        adapter.remove(index);
     }
 }
