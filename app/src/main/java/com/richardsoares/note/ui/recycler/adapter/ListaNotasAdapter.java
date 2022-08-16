@@ -12,6 +12,7 @@ import com.richardsoares.note.R;
 import com.richardsoares.note.model.Nota;
 import com.richardsoares.note.ui.recycler.adapter.listener.OnItemClickListener;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.NotaViewHolder> {
@@ -53,6 +54,11 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
 
     public void remove(int index) {
         notas.remove(index);
+        notifyDataSetChanged();
+    }
+
+    public void troca(int indexInicial, int indexFinal) {
+        Collections.swap(notas, indexInicial, indexFinal);
         notifyDataSetChanged();
     }
 
