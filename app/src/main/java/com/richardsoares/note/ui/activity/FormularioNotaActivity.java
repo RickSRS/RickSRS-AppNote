@@ -19,6 +19,8 @@ import com.richardsoares.note.model.Nota;
 
 public class FormularioNotaActivity extends AppCompatActivity {
 
+    public static final String TITULO_APPBAR_INSERE = "Insere Nota";
+    public static final String TITULO_APPBAR_ALTERA = "Altera Nota";
     private int indexRecebido = INDEX_INVALIDO;
     private TextView titulo;
     private TextView descricao;
@@ -27,10 +29,12 @@ public class FormularioNotaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_nota);
+        setTitle(TITULO_APPBAR_INSERE);
         inicializaCampos();
 
         Intent dadosRecebidos = getIntent();
         if (dadosRecebidos.hasExtra(CHAVE_NOTA)) {
+            setTitle(TITULO_APPBAR_ALTERA);
             Nota notaRecebida = (Nota) dadosRecebidos.getSerializableExtra(CHAVE_NOTA);
             indexRecebido = dadosRecebidos.getIntExtra(CHAVE_INDEX, INDEX_INVALIDO);
             preencheCampos(notaRecebida);
